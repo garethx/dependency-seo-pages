@@ -1,29 +1,39 @@
-const fetch = require("node-fetch")
-const crypto = require("crypto")
-const algoliasearch = require("algoliasearch")
-var uniqid = require("uniqid")
+const fetch = require('node-fetch')
+const crypto = require('crypto')
+const algoliasearch = require('algoliasearch')
+var uniqid = require('uniqid')
 
 exports.sourceNodes = async ({ actions }, configOptions) => {
   const { createNode } = actions
-  const client = algoliasearch("ZACZHDBO7S", configOptions.apiKey)
+  const client = algoliasearch('ZACZHDBO7S', configOptions.apiKey)
   const index = client.initIndex(configOptions.index)
 
   let hits = []
 
   await index.browseObjects({
-    query: "",
-    facets: ["npm_dependencies.dependency"],
+    query: '',
+    facets: ['npm_dependencies.dependency'],
+    attributesToRetrieve: [
+      'objectID',
+      'title',
+      'description',
+      'like_count',
+      'fork_count',
+      'view_count',
+      'template',
+      'npm_dependencies'
+    ],
     batch: batch => {
-      console.log("getting sandboxes")
+      console.log(batch)
       hits = hits.concat(batch)
-    },
+    }
   })
 
   const getInfo = async name => {
     const data = await fetch(
       `https://api.npms.io/v2/package/${name
-        .replace(/\//g, "%2F")
-        .replace(/\@/g, "%40")}`
+        .replace(/\//g, '%2F')
+        .replace(/\@/g, '%40')}`
     ).then(rsp => rsp.json())
 
     return data.collected
@@ -46,7 +56,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
       } else {
         accumulator.push({
           dependency: dep.dependency,
-          sandboxes: [currentValue],
+          sandboxes: [currentValue]
         })
         return accumulator
       }
@@ -69,7 +79,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
     return {
       ...dep,
       info,
-      size,
+      size
     }
   })
 
@@ -85,8 +95,8 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
         contentDigest: crypto
           .createHash(`md5`)
           .update(JSON.stringify(datum))
-          .digest(`hex`),
-      },
+          .digest(`hex`)
+      }
     })
   )
   // We're done, return.

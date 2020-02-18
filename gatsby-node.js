@@ -22,7 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
     result.data.allSandboxDependency.edges.forEach(edge => {
       createPage({
         // Path for this page — required
-        path: `${edge.node.dependency}`,
+        path: `package/${edge.node.dependency}`,
         component: dependencyTemplate,
         context: {
           dependency: edge.node.dependency,

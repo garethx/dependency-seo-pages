@@ -1,12 +1,17 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import normalize from 'normalize.css'
+import { ThemeProvider } from '@codesandbox/components'
+import designLanguage from '@codesandbox/components/lib/design-language/index'
+
 import Header from './header'
 
 const Style = createGlobalStyle`
   ${normalize}
   body {
     font-family: "Inter";
+    background: ${designLanguage.colors.grays[900]};
+    color: ${designLanguage.colors.white};
 
     ul {
       padding: 0;
@@ -27,11 +32,13 @@ const Main = styled.main`
 
 const Layout = ({ children }) => {
   return (
-    <>
-      <Style />
-      <Header siteTitle="Dependency Page" />
-      <Main>{children}</Main>
-    </>
+    <ThemeProvider>
+      <>
+        <Style />
+        <Header siteTitle="Dependency Page" />
+        <Main>{children}</Main>
+      </>
+    </ThemeProvider>
   )
 }
 

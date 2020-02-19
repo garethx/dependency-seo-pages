@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import normalize from 'normalize.css'
+
+import Footer from './footer'
 import { ThemeProvider } from '@codesandbox/components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 
@@ -13,7 +15,7 @@ const Style = createGlobalStyle`
     background: ${designLanguage.colors.grays[900]};
     color: ${designLanguage.colors.white};
 
-    ul {
+    ul, li {
       padding: 0;
       list-style: none;
     }
@@ -37,6 +39,7 @@ const Layout = ({ children }) => {
         <Style />
         <Header siteTitle="Dependency Page" />
         <Main>{children}</Main>
+        <Footer />
       </>
     </ThemeProvider>
   )

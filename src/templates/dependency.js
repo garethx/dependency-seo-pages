@@ -112,38 +112,6 @@ export const query = graphql`
   query MyQuery($dependency: String) {
     sandboxDependency(dependency: { eq: $dependency }) {
       dependency
-      size {
-        size
-      }
-      info {
-        npm {
-          dependentsCount
-          starsCount
-          downloads {
-            count
-          }
-        }
-        metadata {
-          description
-          license
-          version
-          maintainers {
-            username
-          }
-          links {
-            bugs
-            homepage
-            npm
-            repository
-          }
-        }
-        github {
-          issues {
-            count
-          }
-          starsCount
-        }
-      }
       sandboxes {
         objectID
         title

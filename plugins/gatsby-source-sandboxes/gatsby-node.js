@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const crypto = require('crypto')
 const algoliasearch = require('algoliasearch')
 var uniqid = require('uniqid')
@@ -29,31 +28,13 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
     const hits = []
     return index
       .customBrowse({
-        limit: '10000',
+        limit: '60000',
         batch(batch) {
           console.log('getting sandboxes')
           hits.push(...batch)
         }
       })
       .then(() => hits)
-  }
-
-  const getInfo = async name => {
-    const data = await fetch(
-      `https://api.npms.io/v2/package/${name
-        .replace(/\//g, '%2F')
-        .replace(/@/g, '%40')}`
-    ).then(rsp => rsp.json())
-
-    return data.collected
-  }
-
-  const getSize = async name => {
-    const data = await fetch(
-      `https://bundlephobia.com/api/size?package=${name}`
-    ).then(rsp => rsp.json())
-
-    return data
   }
 
   let data = []
@@ -81,25 +62,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
       return accumulator
     }, [])
 
-    const finalData = npmDeps.map(async dep => {
-      const name = dep.dependency
-      let info = {}
-      let size = {}
-      try {
-        info = await getInfo(name)
-      } catch (e) {}
-      try {
-        size = await getSize(name)
-      } catch (e) {}
-
-      return {
-        ...dep,
-        info,
-        size
-      }
-    })
-
-    data = await Promise.all(finalData)
+    data = npmDeps
     fs.writeFileSync(sandboxesFile, JSON.stringify(data))
   } else {
     data = JSON.parse(fs.readFileSync(sandboxesFile))

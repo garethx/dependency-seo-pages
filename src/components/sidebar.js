@@ -35,8 +35,8 @@ const getSize = async name => {
 }
 
 const Sidebar = ({ sandboxes }) => {
-  const [info, setInfo] = useState(sandboxes.info)
-  const [size, setSize] = useState(sandboxes.size)
+  const [info, setInfo] = useState({})
+  const [size, setSize] = useState({})
 
   useEffect(() => {
     if (!info.metadata) {

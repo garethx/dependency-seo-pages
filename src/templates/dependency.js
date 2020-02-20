@@ -64,7 +64,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
         <div>
           <List>
             {sandboxDependency.sandboxes.map(a => (
-              <Card>
+              <Card key={a.objectID}>
                 <img
                   alt={a.title}
                   src={getScreenshot(a.objectID)}

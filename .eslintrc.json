@@ -1,0 +1,11 @@
+{
+  "extends": ["standard", "plugin:react/recommended"],
+  "rules": {
+    "space-before-function-paren": 0,
+    "react/prop-types": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

@@ -3,67 +3,63 @@ const crypto = require('crypto')
 const algoliasearch = require('algoliasearch')
 var uniqid = require('uniqid')
 const fs = require('fs')
+const { addMethods } = require('@algolia/client-common')
+const customBrowse = require('./browse')
 
 const sandboxesFile = './sandboxes.json'
 
 const editedTime = () => {
   const week = 604800
   const stats = fs.statSync(sandboxesFile)
-  let seconds = (new Date().getTime() - stats.mtime) / 1000
+  const seconds = (new Date().getTime() - stats.mtime) / 1000
   return seconds > week
 }
 
 exports.sourceNodes = async ({ actions }, configOptions) => {
   const { createNode } = actions
-  const client = algoliasearch('ZACZHDBO7S', configOptions.apiKey)
-  const index = client.initIndex(configOptions.index)
+
+  const index = addMethods(
+    algoliasearch('ZACZHDBO7S', configOptions.apiKey).initIndex(
+      configOptions.index
+    ),
+    { customBrowse }
+  )
+
+  function getEverything() {
+    const hits = []
+    return index
+      .customBrowse({
+        limit: '10000',
+        batch(batch) {
+          console.log('getting sandboxes')
+          hits.push(...batch)
+        }
+      })
+      .then(() => hits)
+  }
+
+  const getInfo = async name => {
+    const data = await fetch(
+      `https://api.npms.io/v2/package/${name
+        .replace(/\//g, '%2F')
+        .replace(/@/g, '%40')}`
+    ).then(rsp => rsp.json())
+
+    return data.collected
+  }
+
+  const getSize = async name => {
+    const data = await fetch(
+      `https://bundlephobia.com/api/size?package=${name}`
+    ).then(rsp => rsp.json())
+
+    return data
+  }
 
   let data = []
   if (!fs.existsSync(sandboxesFile) || editedTime()) {
-    let hits = []
-    try {
-      await new Promise((resolve, reject) => {
-        index.browseObjects({
-          query: '',
-          facets: ['npm_dependencies.dependency'],
-          maxValuesPerFacet: 36,
-          attributesToRetrieve: [
-            'objectID',
-            'title',
-            'description',
-            'author',
-            'template',
-            'npm_dependencies'
-          ],
-          batch: batch => {
-            if (hits.length > 10000) {
-              reject()
-              return
-            }
-            console.log('getting sandboxes', hits.length)
-            hits = hits.concat(batch)
-          }
-        })
-      })
-    } catch (e) {}
-
-    const getInfo = async name => {
-      const data = await fetch(
-        `https://api.npms.io/v2/package/${name
-          .replace(/\//g, '%2F')
-          .replace(/\@/g, '%40')}`
-      ).then(rsp => rsp.json())
-
-      return data.collected
-    }
-
-    const getSize = async name => {
-      const data = await fetch(
-        `https://bundlephobia.com/api/size?package=${name}`
-      ).then(rsp => rsp.json())
-
-      return data
-    }
+    const hits = await getEverything()
+    console.log('getting info')
 
     const npmDeps = hits.reduce((accumulator, currentValue) => {
       currentValue.npm_dependencies.map(dep => {
@@ -108,7 +104,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
   } else {
     data = JSON.parse(fs.readFileSync(sandboxesFile))
   }
-
+  console.log('creating data')
   data.forEach(datum =>
     createNode({
       ...datum,
@@ -116,14 +112,13 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
       parent: null,
       children: [],
       internal: {
-        type: `SandboxDependency`,
+        type: 'SandboxDependency',
         contentDigest: crypto
-          .createHash(`md5`)
+          .createHash('md5')
           .update(JSON.stringify(datum))
-          .digest(`hex`)
+          .digest('hex')
       }
     })
   )
   // We're done, return.
-  return
 }

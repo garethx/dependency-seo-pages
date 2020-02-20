@@ -1,8 +1,8 @@
-const path = require(`path`)
+const path = require('path')
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  const dependencyTemplate = path.resolve(`src/templates/dependency.js`)
+  const dependencyTemplate = path.resolve('src/templates/dependency.js')
   return graphql(`
     query MyQuery {
       allSandboxDependency {
@@ -25,8 +25,8 @@ exports.createPages = ({ graphql, actions }) => {
         path: `package/${edge.node.dependency}`,
         component: dependencyTemplate,
         context: {
-          dependency: edge.node.dependency,
-        },
+          dependency: edge.node.dependency
+        }
       })
     })
   })

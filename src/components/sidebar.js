@@ -20,7 +20,7 @@ const getInfo = async name => {
   const data = await fetch(
     `https://api.npms.io/v2/package/${name
       .replace(/\//g, '%2F')
-      .replace(/\@/g, '%40')}`
+      .replace(/@/g, '%40')}`
   ).then(rsp => rsp.json())
 
   return data.collected
@@ -143,7 +143,6 @@ const Sidebar = ({ sandboxes }) => {
         marginTop={28}
         paddingTop={4}
         block
-        marginTop={4}
         weight="bold"
       >
         External Links
@@ -187,6 +186,7 @@ const Sidebar = ({ sandboxes }) => {
       >
         {info.metadata.maintainers.map(maintainer => (
           <Element
+            key={maintainer.username}
             as="img"
             css={{
               'border-radius': designLanguage.radii.small + 'px',

@@ -5,6 +5,9 @@
   "version": "0.1.0",
   "author": "codesandbox",
   "dependencies": {
+    "@algolia/client-common": "^4.0.3",
+    "@algolia/client-search": "^4.0.3",
+    "@algolia/requester-common": "^4.0.3",
     "@codesandbox/common": "^1.0.8",
     "@codesandbox/components": "^0.0.1",
     "@codesandbox/template-icons": "^1.1.0",
@@ -29,6 +32,13 @@
     "uniqid": "^5.2.0"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-standard": "^4.0.1",
     "prettier": "^1.19.1",
     "why-did-you-update": "^1.0.8"
   },
@@ -42,7 +52,9 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "lint": "eslint . --cache --fix",
+    "pretest": "npm run lint"
   },
   "repository": {
     "type": "git",

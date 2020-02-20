@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Stack,
-  Element,
-  Button,
-  Link,
-  SearchInput
-} from '@codesandbox/components'
+import { Stack, Button, Link, SearchInput } from '@codesandbox/components'
 import Logo from './logo'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 
@@ -33,7 +27,7 @@ const Header = () => {
           onChange={e => setValue(e.target.value)}
           value={value}
           onKeyDown={e => {
-            if (e.key === 'Enter' && typeof window !== undefined) {
+            if (e.key === 'Enter' && typeof window !== 'undefined') {
               window.location.href = `https://codesandbox.io/search?query=${value}&page=1&configure%5BhitsPerPage%5D=12`
             }
           }}

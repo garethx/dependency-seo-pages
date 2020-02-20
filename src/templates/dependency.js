@@ -5,24 +5,26 @@ import Layout from '../components/layout'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 import getIcon from '@codesandbox/common/lib/templates/icons'
+import Sidebar from '../components/sidebar'
 
-const Main = styled(Element)`
+const Main = styled.div`
   display: grid;
-  grid-template-columns: 1fr 304px;
+  grid-template-columns: 1fr 300px;
   grid-gap: 30px;
+  align-items: flex-start;
 
   @media screen and (max-width: 780px) {
     grid-template-columns: 1fr;
   }
 `
 
-const List = styled(Element)`
+const List = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 305px);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
 `
 
-const Card = styled(Element)`
+const Card = styled.div`
   background: ${designLanguage.colors.grays[700]};
   border-radius: ${designLanguage.radii.small}px;
   border: 1px solid ${designLanguage.colors.grays[600]};
@@ -42,7 +44,6 @@ const Dependency = ({ data: { sandboxDependency } }) => {
     .split('-')
     .map(a => capitalize(a))
     .join(' ')
-  const downloads = sandboxDependency.info.npm.downloads
 
   return (
     <Layout>
@@ -101,23 +102,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
             ))}
           </List>
         </div>
-        <aside>
-          <span>
-            {downloads[downloads.length - 1].count} Downloads in the last year
-          </span>
-          <ul>
-            {sandboxDependency.info.metadata.maintainers.map(maintainer => (
-              <li>
-                <img
-                  src={`https://github.com/${maintainer.username}.png?size=40`}
-                  alt={maintainer.username}
-                  width="32"
-                  height="32"
-                />
-              </li>
-            ))}
-          </ul>
-        </aside>
+        <Sidebar sandboxes={sandboxDependency} />
       </Main>
     </Layout>
   )

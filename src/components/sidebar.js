@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 import styled from 'styled-components'
@@ -16,21 +16,50 @@ function numberWithCommas(x) {
 const cleanURL = url => url.split('https://')[1]
 const cleanNPM = url => url.split('https://www.npmjs.com/package/')[1]
 
-const Sidebar = ({ sandboxes }) => {
-  const downloads = sandboxes.info.npm.downloads
-  const links = sandboxes.info.metadata.links
+const getInfo = async name => {
+  const data = await fetch(
+    `https://api.npms.io/v2/package/${name
+      .replace(/\//g, '%2F')
+      .replace(/\@/g, '%40')}`
+  ).then(rsp => rsp.json())
 
-  console.log(sandboxes)
-  return (
+  return data.collected
+}
+
+const getSize = async name => {
+  const data = await fetch(
+    `https://bundlephobia.com/api/size?package=${name}`
+  ).then(rsp => rsp.json())
+
+  return data
+}
+
+const Sidebar = ({ sandboxes }) => {
+  const [info, setInfo] = useState(sandboxes.info)
+  const [size, setSize] = useState(sandboxes.size)
+
+  useEffect(() => {
+    if (!info.metadata) {
+      getInfo(sandboxes.dependency).then(setInfo)
+    }
+    if (!size.size) {
+      getSize(sandboxes.dependency).then(setSize)
+    }
+  }, [])
+
+  const downloads = (info.npm || {}).downloads
+  const links = (info.metadata || {}).links
+
+  return info.metadata ? (
     <Wrapper as="aside" paddingX={16} paddingY={24}>
       <Text block weight="bold" size={19}>
         About
       </Text>
       <Text variant="muted" block marginTop={2}>
-        {sandboxes.info.metadata.description}
+        {info.metadata.description}
       </Text>
       <Text block weight="bold" size={19} marginTop={9}>
-        {numberWithCommas(downloads[2].count)}
+        {numberWithCommas(downloads[1].count)}
       </Text>
       <Text variant="muted" block marginTop={1}>
         Weekly Downloads
@@ -49,7 +78,7 @@ const Sidebar = ({ sandboxes }) => {
             Latest version
           </Text>
           <Text block paddingTop={1}>
-            {sandboxes.info.metadata.version}
+            {info.metadata.version}
           </Text>
         </Element>
         <Element>
@@ -57,7 +86,7 @@ const Sidebar = ({ sandboxes }) => {
             License
           </Text>
           <Text block paddingTop={1}>
-            {sandboxes.info.metadata.license}
+            {info.metadata.license}
           </Text>
         </Element>
       </Element>
@@ -73,7 +102,7 @@ const Sidebar = ({ sandboxes }) => {
             Size
           </Text>
           <Text block paddingTop={1}>
-            {sandboxes.size.size / 1000}Kb
+            {size.size / 1000}Kb
           </Text>
         </Element>
         <Element>
@@ -81,7 +110,7 @@ const Sidebar = ({ sandboxes }) => {
             Packages Using it
           </Text>
           <Text block paddingTop={1}>
-            {sandboxes.info.npm.dependentsCount}
+            {info.npm.dependentsCount}
           </Text>
         </Element>
       </Element>
@@ -97,7 +126,7 @@ const Sidebar = ({ sandboxes }) => {
             Issues Count
           </Text>
           <Text block paddingTop={1}>
-            {sandboxes.info.github.issues.count}
+            {info.github.issues.count}
           </Text>
         </Element>
         <Element>
@@ -105,7 +134,7 @@ const Sidebar = ({ sandboxes }) => {
             Stars
           </Text>
           <Text block paddingTop={1}>
-            {sandboxes.info.github.starsCount}
+            {info.github.starsCount}
           </Text>
         </Element>
       </Element>
@@ -156,7 +185,7 @@ const Sidebar = ({ sandboxes }) => {
         }}
         gap={2}
       >
-        {sandboxes.info.metadata.maintainers.map(maintainer => (
+        {info.metadata.maintainers.map(maintainer => (
           <Element
             as="img"
             css={{
@@ -171,6 +200,8 @@ const Sidebar = ({ sandboxes }) => {
         ))}
       </Stack>
     </Wrapper>
+  ) : (
+    <Wrapper as="aside" paddingX={16} paddingY={24}></Wrapper>
   )
 }
 

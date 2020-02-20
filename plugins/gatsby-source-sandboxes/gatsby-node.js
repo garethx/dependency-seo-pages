@@ -21,24 +21,31 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
   let data = []
   if (!fs.existsSync(sandboxesFile) || editedTime()) {
     let hits = []
-    await index.browseObjects({
-      query: '',
-      facets: ['npm_dependencies.dependency'],
-      maxValuesPerFacet: 36,
-      attributesToRetrieve: [
-        'objectID',
-        'title',
-        'description',
-        'author',
-        'template',
-        'npm_dependencies'
-      ],
-      batch: batch => {
-        if (hits.length > 50000) return
-        console.log('getting sandboxes', hits.length)
-        hits = hits.concat(batch)
-      }
-    })
+    try {
+      await new Promise((resolve, reject) => {
+        index.browseObjects({
+          query: '',
+          facets: ['npm_dependencies.dependency'],
+          maxValuesPerFacet: 36,
+          attributesToRetrieve: [
+            'objectID',
+            'title',
+            'description',
+            'author',
+            'template',
+            'npm_dependencies'
+          ],
+          batch: batch => {
+            if (hits.length > 10000) {
+              reject()
+              return
+            }
+            console.log('getting sandboxes', hits.length)
+            hits = hits.concat(batch)
+          }
+        })
+      })
+    } catch (e) {}
 
     const getInfo = async name => {
       const data = await fetch(

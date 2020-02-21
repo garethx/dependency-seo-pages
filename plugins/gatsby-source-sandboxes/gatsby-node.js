@@ -18,7 +18,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
     const hits = []
     return index
       .customBrowse({
-        limit: '10000',
+        limit: '60000',
         batch(batch) {
           console.log('getting sandboxes')
           hits.push(...batch)

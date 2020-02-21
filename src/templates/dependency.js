@@ -40,7 +40,11 @@ const Card = styled.div`
   width: 310px;
   max-width: 100%;
 
-  img {
+  .screenshot {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 1500px) {
     width: 100%;
   }
 
@@ -82,9 +86,10 @@ const Dependency = ({ data: { sandboxDependency } }) => {
       <Main>
         <div>
           <List>
-            {sandboxDependency.sandboxes.map(a => (
+            {sandboxDependency.sandboxes.slice(0, 50).map(a => (
               <Card key={a.objectID}>
                 <img
+                  className="screenshot"
                   alt={a.title}
                   src={getScreenshot(a.objectID)}
                   height={162}

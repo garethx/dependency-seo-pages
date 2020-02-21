@@ -11,7 +11,7 @@ import Header from './header'
 const Style = createGlobalStyle`
   ${normalize}
   body {
-    font-family: "Inter";
+    font-family: 'Inter', 'Roboto', sans-serif;
     background: ${designLanguage.colors.grays[900]};
     color: ${designLanguage.colors.white};
     font-size: 13px;

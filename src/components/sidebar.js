@@ -8,6 +8,11 @@ const Wrapper = styled(Element)`
   background: ${designLanguage.colors.grays[700]};
   border-radius: ${designLanguage.radii.small}px;
   border: 1px solid ${designLanguage.colors.grays[600]};
+
+  @media screen and (max-width: 1000px) {
+    order: -1;
+    width: 100%;
+  }
 `
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

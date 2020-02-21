@@ -10,11 +10,11 @@ import Sidebar from '../components/sidebar'
 
 const Main = styled.div`
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: minmax(0, 1fr) 300px;
   grid-gap: 30px;
   align-items: flex-start;
 
-  @media screen and (max-width: 780px) {
+  @media screen and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
 `
@@ -23,13 +23,30 @@ const List = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const Card = styled.div`
   background: ${designLanguage.colors.grays[700]};
   border-radius: ${designLanguage.radii.small}px;
   border: 1px solid ${designLanguage.colors.grays[600]};
-  max-width: 310px;
+  width: 310px;
+  max-width: 100%;
+
+  img {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `
 
 const capitalize = s => {

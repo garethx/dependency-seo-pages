@@ -76,12 +76,17 @@ const Dependency = ({ data: { sandboxDependency } }) => {
                 <Element paddingX={4} paddingTop={2} paddingBottom={5}>
                   <Text block>{a.title}</Text>
 
-                  <Text block marginTop={2} variant="muted">
+                  <Text
+                    block
+                    marginTop={2}
+                    variant="muted"
+                    style={{ height: 28 }}
+                  >
                     {a.description}
                   </Text>
 
                   <Stack align="center" justify="space-between" marginTop={5}>
-                    {a.author && (
+                    {a.author ? (
                       <Stack align="center" gap={2}>
                         <img
                           width={24}
@@ -96,6 +101,8 @@ const Dependency = ({ data: { sandboxDependency } }) => {
                           {a.author.username}
                         </Link>
                       </Stack>
+                    ) : (
+                      <Element />
                     )}
                     {getIcon(a.template)({})}
                   </Stack>

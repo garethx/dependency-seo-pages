@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
+import SEO from '../components/seo'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 import getIcon from '@codesandbox/common/lib/templates/icons'
@@ -47,6 +48,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
 
   return (
     <Layout>
+      <SEO title={`CodeSandbox | ${name} sandboxes`} pkg={name} />
       <Text size={40} block>
         {name} Examples
       </Text>

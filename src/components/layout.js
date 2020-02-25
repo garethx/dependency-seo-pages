@@ -12,7 +12,7 @@ const Style = createGlobalStyle`
   ${normalize}
   body {
     font-family: 'Inter', 'Roboto', sans-serif;
-    background: ${designLanguage.colors.grays[900]};
+    background: ${designLanguage.colors.grays[900]} !important;
     color: ${designLanguage.colors.white};
     font-size: 13px;
 

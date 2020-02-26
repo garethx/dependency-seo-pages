@@ -73,7 +73,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
 
   return (
     <Layout>
-      <SEO title={`CodeSandbox | ${name} sandboxes`} pkg={name} />
+      <SEO title={`${name} examples - CodeSandbox`} pkg={name} />
       <Text size={40} block>
         {name} Examples
       </Text>
@@ -84,32 +84,38 @@ const Dependency = ({ data: { sandboxDependency } }) => {
         variant="muted"
         style={{ maxWidth: 600 }}
       >
-        Learn how to use {name} by viewing and forking {name} examples apps on
+        Learn how to use {name} by viewing and forking {name} example apps on
         CodeSandbox
       </Text>
       <Main>
         <div>
           <List>
-            {sandboxDependency.sandboxes.slice(0, 50).map(a => (
+            {sandboxDependency.sandboxes.slice(0, 12).map(a => (
               <Card key={a.objectID}>
-                <img
-                  className="screenshot"
-                  alt={a.title}
-                  src={getScreenshot(a.objectID)}
-                  height={162}
-                  style={{ display: 'block' }}
-                />
+                <Link href={`https://codesandbox.io/s/${a.objectID}`}>
+                  <img
+                    className="screenshot"
+                    alt={a.title}
+                    src={getScreenshot(a.objectID)}
+                    height={162}
+                    style={{ display: 'block' }}
+                  />
+                </Link>
                 <Element paddingX={4} paddingTop={2} paddingBottom={5}>
-                  <Text block>{a.title}</Text>
+                  <Link href={`https://codesandbox.io/s/${a.objectID}`}>
+                    <Text block>{a.title}</Text>
+                  </Link>
 
-                  <Text
-                    block
-                    marginTop={2}
-                    variant="muted"
-                    style={{ height: 28 }}
-                  >
-                    {a.description}
-                  </Text>
+                  <Link href={`https://codesandbox.io/s/${a.objectID}`}>
+                    <Text
+                      block
+                      marginTop={2}
+                      variant="muted"
+                      style={{ height: 28 }}
+                      >
+                      {a.description}
+                   </Text>
+                  </Link>
 
                   <Stack align="center" justify="space-between" marginTop={5}>
                     {a.author ? (
@@ -122,7 +128,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
                         />
 
                         <Link
-                          href={`https//codesandbox.io/u/${a.author.username}`}
+                          href={`https://codesandbox.io/u/${a.author.username}`}
                         >
                           {a.author.username}
                         </Link>

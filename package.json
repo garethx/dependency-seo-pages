@@ -27,7 +27,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
-    "styled-components": "^5.0.1",
+    "styled-components": "^4.4.1",
     "typeface-inter": "^3.12.0",
     "uniqid": "^5.2.0"
   },
@@ -39,9 +39,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-standard": "^4.0.1",
-    "gatsby-plugin-theme-ui": "^0.3.0",
     "prettier": "^1.19.1",
-    "theme-ui": "^0.3.1",
     "why-did-you-update": "^1.0.8"
   },
   "keywords": [

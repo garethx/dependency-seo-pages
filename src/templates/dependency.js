@@ -74,10 +74,12 @@ const Dependency = ({ data: { sandboxDependency } }) => {
   return (
     <Layout>
       <SEO title={`${name} examples - CodeSandbox`} pkg={name} />
-      <Text size={40} block>
+      <Text style={{ margin: 0 }} as="h1" weight="400" size={40} block>
         {name} Examples
       </Text>
       <Text
+        as="h2"
+        weight="400"
         marginBottom={10}
         marginTop={2}
         block
@@ -112,9 +114,9 @@ const Dependency = ({ data: { sandboxDependency } }) => {
                       marginTop={2}
                       variant="muted"
                       style={{ height: 28 }}
-                      >
+                    >
                       {a.description}
-                   </Text>
+                    </Text>
                   </Link>
 
                   <Stack align="center" justify="space-between" marginTop={5}>

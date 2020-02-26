@@ -44,11 +44,11 @@ const Card = styled.div`
     width: 100%;
   }
 
-  @media screen and (max-width: 1500px) {
+  @media screen and (max-width: 1640px) {
     width: 250px;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1400px) {
     width: 310px;
   }
 
@@ -85,7 +85,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
         style={{ maxWidth: 600 }}
       >
         Learn how to use {name} by viewing and forking {name} example apps on
-        CodeSandbox
+        CodeSandbox.
       </Text>
       <Main>
         <div>

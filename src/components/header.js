@@ -29,7 +29,7 @@ const Header = () => {
           margin: 'auto'
         }}
       >
-        <Link to="https://codesandbox.io">
+        <Link href="https://codesandbox.io">
           <Logo />
         </Link>
         <Stack gap={6} align="center">

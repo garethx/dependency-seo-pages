@@ -9,7 +9,7 @@ function SEO({ title, pkg }) {
       meta={[
         {
           name: 'description',
-          content: `Learn how to use ${pkg} by viewing and forking ${pkg} examples apps on
+          content: `Learn how to use ${pkg} by viewing and forking ${pkg} example apps on
         CodeSandbox`
         },
         {
@@ -18,7 +18,7 @@ function SEO({ title, pkg }) {
         },
         {
           property: 'og:description',
-          content: `Learn how to use ${pkg} by viewing and forking ${pkg} examples apps on
+          content: `Learn how to use ${pkg} by viewing and forking ${pkg} example apps on
         CodeSandbox`
         },
         {
@@ -39,7 +39,7 @@ function SEO({ title, pkg }) {
         },
         {
           name: 'twitter:description',
-          content: `Learn how to use ${pkg} by viewing and forking ${pkg} examples apps on
+          content: `Learn how to use ${pkg} by viewing and forking ${pkg} example apps on
         CodeSandbox`
         }
       ]}

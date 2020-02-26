@@ -190,18 +190,20 @@ const Sidebar = ({ sandboxes }) => {
         gap={2}
       >
         {info.metadata.maintainers.map(maintainer => (
-          <Element
-            key={maintainer.username}
-            as="img"
-            css={{
-              'border-radius': designLanguage.radii.small + 'px',
-              border: '1px solid' + designLanguage.colors.grays[600]
-            }}
-            src={`https://github.com/${maintainer.username}.png?size=40`}
-            alt={maintainer.username}
-            width="32"
-            height="32"
-          />
+         <Link href={`https://github.com/${maintainer.username}`}> 
+           <Element
+              key={maintainer.username}
+              as="img"
+              css={{
+                'border-radius': designLanguage.radii.small + 'px',
+                border: '1px solid' + designLanguage.colors.grays[600]
+              }}
+              src={`https://github.com/${maintainer.username}.png?size=40`}
+              alt={maintainer.username}
+              width="32"
+              height="32"
+            />
+          </Link>
         ))}
       </Stack>
     </Wrapper>

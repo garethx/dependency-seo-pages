@@ -35,7 +35,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
       const found = accumulator.find(a => a.dependency === dep.dependency)
 
       if (found) {
-        if (found.sandboxes.length > 50) return accumulator
+        if (found.sandboxes.length > 12) return accumulator
         found.sandboxes.push(currentValue)
         return accumulator
       } else {

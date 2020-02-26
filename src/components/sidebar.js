@@ -19,7 +19,11 @@ function numberWithCommas(x) {
 }
 
 const cleanURL = url => url.split('https://')[1]
-const cleanNPM = url => url.split('https://www.npmjs.com/package/')[1]
+const cleanNPM = url =>
+  url
+    .split('https://www.npmjs.com/package/')[1]
+    .replace(/%2F/g, '/')
+    .replace(/%40/g, '')
 
 const getInfo = async name => {
   const data = await fetch(
@@ -102,14 +106,16 @@ const Sidebar = ({ sandboxes }) => {
         }}
         paddingTop={4}
       >
-        <Element>
-          <Text block variant="muted">
-            Size
-          </Text>
-          <Text block paddingTop={1}>
-            {size.size / 1000}Kb
-          </Text>
-        </Element>
+        {size.size && (
+          <Element>
+            <Text block variant="muted">
+              Size
+            </Text>
+            <Text block paddingTop={1}>
+              {size.size / 1000}Kb
+            </Text>
+          </Element>
+        )}
         <Element>
           <Text block variant="muted">
             Packages Using it
@@ -190,8 +196,8 @@ const Sidebar = ({ sandboxes }) => {
         gap={2}
       >
         {info.metadata.maintainers.map(maintainer => (
-         <Link href={`https://github.com/${maintainer.username}`}> 
-           <Element
+          <Link href={`https://github.com/${maintainer.username}`}>
+            <Element
               key={maintainer.username}
               as="img"
               css={{

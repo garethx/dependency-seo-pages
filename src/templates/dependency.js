@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { Text, Element, Stack, Link } from '@codesandbox/components'
+import { Text, Element, Stack, Link, Button } from '@codesandbox/components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 import getIcon from '@codesandbox/common/lib/templates/icons'
 import Sidebar from '../components/sidebar'
@@ -144,6 +144,15 @@ const Dependency = ({ data: { sandboxDependency } }) => {
               </Card>
             ))}
           </List>
+          <Button
+            as="a"
+            marginTop={4}
+            style={{ textDecoration: 'none' }}
+            href={`https://codesandbox.io/search?refinementList%5Btemplate%5D=&refinementList%5Bnpm_dependencies.dependency%5D%5B0%5D=${sandboxDependency.dependency}&page=2&configure%5BhitsPerPage%5D=12`}
+            variant="secondary"
+          >
+            Next Page
+          </Button>
         </div>
         <Sidebar sandboxes={sandboxDependency} />
       </Main>

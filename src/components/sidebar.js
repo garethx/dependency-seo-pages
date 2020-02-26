@@ -125,30 +125,32 @@ const Sidebar = ({ sandboxes }) => {
           </Text>
         </Element>
       </Element>
-      <Element
-        css={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr'
-        }}
-        paddingTop={4}
-      >
-        <Element>
-          <Text block variant="muted">
-            Issues Count
-          </Text>
-          <Text block paddingTop={1}>
-            {info.github.issues.count}
-          </Text>
+      {info.github && (
+        <Element
+          css={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr'
+          }}
+          paddingTop={4}
+        >
+          <Element>
+            <Text block variant="muted">
+              Issues Count
+            </Text>
+            <Text block paddingTop={1}>
+              {info.github.issues.count}
+            </Text>
+          </Element>
+          <Element>
+            <Text block variant="muted">
+              Stars
+            </Text>
+            <Text block paddingTop={1}>
+              {info.github.starsCount}
+            </Text>
+          </Element>
         </Element>
-        <Element>
-          <Text block variant="muted">
-            Stars
-          </Text>
-          <Text block paddingTop={1}>
-            {info.github.starsCount}
-          </Text>
-        </Element>
-      </Element>
+      )}
       <Text
         css={{ borderTop: '1px solid' + designLanguage.colors.grays[600] }}
         marginTop={28}
@@ -159,22 +161,30 @@ const Sidebar = ({ sandboxes }) => {
         External Links
       </Text>
 
-      <Stack align="center" gap={1} marginTop={4}>
-        <GlobeIcon></GlobeIcon>
-        <Link href={links.homepage}>{cleanURL(links.homepage)}</Link>
-      </Stack>
-      <Stack align="center" gap={1} marginTop={4}>
-        <GHIcon></GHIcon>
-        <Link href={links.repository}>{cleanURL(links.repository)}</Link>
-      </Stack>
-      <Stack align="center" gap={1} marginTop={4}>
-        <IssuesIcon></IssuesIcon>
-        <Link href={links.bugs}>{cleanURL(links.bugs)}</Link>
-      </Stack>
-      <Stack align="center" gap={1} marginTop={4}>
-        <NPMIcon></NPMIcon>
-        <Link href={links.npm}>@{cleanNPM(links.npm)}</Link>
-      </Stack>
+      {links.homepage && (
+        <Stack align="center" gap={1} marginTop={4}>
+          <GlobeIcon></GlobeIcon>
+          <Link href={links.homepage}>{cleanURL(links.homepage)}</Link>
+        </Stack>
+      )}
+      {links.repository && (
+        <Stack align="center" gap={1} marginTop={4}>
+          <GHIcon></GHIcon>
+          <Link href={links.repository}>{cleanURL(links.repository)}</Link>
+        </Stack>
+      )}
+      {links.bugs && (
+        <Stack align="center" gap={1} marginTop={4}>
+          <IssuesIcon></IssuesIcon>
+          <Link href={links.bugs}>{cleanURL(links.bugs)}</Link>
+        </Stack>
+      )}
+      {links.npm && (
+        <Stack align="center" gap={1} marginTop={4}>
+          <NPMIcon></NPMIcon>
+          <Link href={links.npm}>@{cleanNPM(links.npm)}</Link>
+        </Stack>
+      )}
       <Text
         block
         css={{ borderTop: '1px solid' + designLanguage.colors.grays[600] }}

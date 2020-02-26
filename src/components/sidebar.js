@@ -10,7 +10,7 @@ const Wrapper = styled(Element)`
   border: 1px solid ${designLanguage.colors.grays[600]};
 
   @media screen and (max-width: 1000px) {
-    order: -1;
+    order: 1;
     width: 100%;
   }
 `

@@ -196,7 +196,10 @@ const Sidebar = ({ sandboxes }) => {
         gap={2}
       >
         {info.metadata.maintainers.map(maintainer => (
-          <Link href={`https://github.com/${maintainer.username}`}>
+          <Link
+            key={maintainer.username}
+            href={`https://github.com/${maintainer.username}`}
+          >
             <Element
               key={maintainer.username}
               as="img"

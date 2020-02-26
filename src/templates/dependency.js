@@ -105,7 +105,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
                 </Link>
                 <Element paddingX={4} paddingTop={2} paddingBottom={5}>
                   <Link href={`https://codesandbox.io/s/${a.objectID}`}>
-                    <Text block>{a.title}</Text>
+                    <Text block>{a.title || a.objectID}</Text>
                   </Link>
 
                   <Link href={`https://codesandbox.io/s/${a.objectID}`}>
@@ -113,7 +113,7 @@ const Dependency = ({ data: { sandboxDependency } }) => {
                       block
                       marginTop={2}
                       variant="muted"
-                      style={{ height: 28 }}
+                      style={{ height: 28, wordBreak: 'break-all' }}
                     >
                       {a.description}
                     </Text>

@@ -20,7 +20,7 @@ const NotFoundPage = props => {
     sandboxes: []
   })
   const [error, setError] = useState(false)
-  const name = pkg
+  const name = (pkg || '')
     .split('-')
     .map(a => capitalize(a))
     .join(' ')

@@ -29,7 +29,7 @@ const NotFoundPage = props => {
     index
       .search('', {
         facetFilters: [`npm_dependencies.dependency:${pkg}`],
-        hitsPerPage: 12
+        hitsPerPage: 13
       })
       .then(({ hits }) => {
         if (!hits.length) setError(true)

@@ -58,6 +58,7 @@ const getScreenshot = id =>
   `https://codesandbox.io/api/v1/sandboxes/${id}/screenshot.png`
 
 const Main = ({ name, dependency }) => {
+  console.log(dependency)
   return (
     <>
       <Text style={{ margin: 0 }} as="h1" weight="400" size={40} block>
@@ -89,7 +90,7 @@ const Main = ({ name, dependency }) => {
                     style={{ display: 'block' }}
                   />
                 </Link>
-                <Element paddingX={4} paddingTop={2} paddingBottom={5}>
+                <Element paddingX={4} paddingTop={4} paddingBottom={5}>
                   <Link href={`https://codesandbox.io/s/${a.objectID}`}>
                     <Text block>{a.title || a.objectID}</Text>
                   </Link>
@@ -130,7 +131,7 @@ const Main = ({ name, dependency }) => {
               </Card>
             ))}
           </List>
-          {dependency.sandboxes >= 12 && (
+          {dependency.sandboxes.length >= 12 && (
             <Button
               as="a"
               marginTop={4}

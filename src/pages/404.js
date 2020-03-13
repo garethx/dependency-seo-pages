@@ -32,6 +32,7 @@ const NotFoundPage = props => {
         hitsPerPage: 13
       })
       .then(({ hits }) => {
+        console.log(hits)
         if (!hits.length) setError(true)
         setDependency({
           dependency: pkg,

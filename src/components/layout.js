@@ -33,10 +33,6 @@ const Main = styled.main`
   max-width: 80%;
 `
 
-if (process.env.NODE_ENV !== 'production') {
-  const { whyDidYouUpdate } = require('why-did-you-update')
-  whyDidYouUpdate(React)
-}
 const Layout = ({ children }) => {
   return (
     <ThemeProvider>

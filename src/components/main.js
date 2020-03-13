@@ -58,7 +58,6 @@ const getScreenshot = id =>
   `https://codesandbox.io/api/v1/sandboxes/${id}/screenshot.png`
 
 const Main = ({ name, dependency }) => {
-  console.log(dependency)
   return (
     <>
       <Text style={{ margin: 0 }} as="h1" weight="400" size={40} block>

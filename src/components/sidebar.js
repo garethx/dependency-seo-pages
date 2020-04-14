@@ -8,6 +8,8 @@ const Wrapper = styled(Element)`
   background: ${designLanguage.colors.grays[700]};
   border-radius: ${designLanguage.radii.small}px;
   border: 1px solid ${designLanguage.colors.grays[600]};
+  position: sticky;
+  top: 20px;
 
   @media screen and (max-width: 1000px) {
     order: 1;

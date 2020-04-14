@@ -5,6 +5,12 @@ import styled from 'styled-components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 import Sidebar from './sidebar'
 
+const ScreenShot = styled.img`
+  object-fit: cover;
+  display: block;
+  object-position: 50% 50%;
+`
+
 const MainComponent = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
@@ -32,10 +38,16 @@ const List = styled.div`
 
 const Card = styled.div`
   background: ${designLanguage.colors.grays[700]};
-  border-radius: ${designLanguage.radii.small}px;
+  border-radius: ${designLanguage.radii.medium}px;
   border: 1px solid ${designLanguage.colors.grays[600]};
   width: 310px;
   max-width: 100%;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    filter: grayscale(1);
+  }
 
   .screenshot {
     width: 100%;
@@ -81,38 +93,48 @@ const Main = ({ name, dependency }) => {
             {dependency.sandboxes.slice(0, 12).map(a => (
               <Card key={a.objectID}>
                 <Link href={`https://codesandbox.io/s/${a.objectID}`}>
-                  <img
+                  <ScreenShot
                     className="screenshot"
                     alt={a.title}
                     src={getScreenshot(a.objectID)}
                     height={162}
-                    style={{ display: 'block' }}
                   />
                 </Link>
-                <Element paddingX={4} paddingTop={4} paddingBottom={5}>
-                  <Link href={`https://codesandbox.io/s/${a.objectID}`}>
-                    <Text block>{a.title || a.objectID}</Text>
-                  </Link>
+                <Element
+                  paddingX={4}
+                  paddingTop={4}
+                  paddingBottom={5}
+                  style={{
+                    height: 158,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  <div>
+                    <Link href={`https://codesandbox.io/s/${a.objectID}`}>
+                      <Text block>{a.title || a.objectID}</Text>
+                    </Link>
 
-                  <Link href={`https://codesandbox.io/s/${a.objectID}`}>
-                    <Text
-                      block
-                      marginTop={2}
-                      variant="muted"
-                      style={{
-                        height: 28,
-                        wordBreak: 'break-all',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        display: '-webkit-box',
-                        '-webkit-line-clamp': '2',
-                        WebkitBoxOrient: 'vertical'
-                      }}
-                    >
-                      {a.description}
-                    </Text>
-                  </Link>
-
+                    <Link href={`https://codesandbox.io/s/${a.objectID}`}>
+                      <Text
+                        block
+                        marginTop={2}
+                        variant="muted"
+                        style={{
+                          height: 28,
+                          wordBreak: 'break-all',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          display: '-webkit-box',
+                          '-webkit-line-clamp': '2',
+                          WebkitBoxOrient: 'vertical'
+                        }}
+                      >
+                        {a.description}
+                      </Text>
+                    </Link>
+                  </div>
                   <Stack align="center" justify="space-between" marginTop={5}>
                     {a.author ? (
                       <Stack align="center" gap={2}>

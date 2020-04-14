@@ -99,7 +99,15 @@ const Main = ({ name, dependency }) => {
                       block
                       marginTop={2}
                       variant="muted"
-                      style={{ height: 28, wordBreak: 'break-all' }}
+                      style={{
+                        height: 28,
+                        wordBreak: 'break-all',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        '-webkit-line-clamp': '2',
+                        WebkitBoxOrient: 'vertical'
+                      }}
                     >
                       {a.description}
                     </Text>

@@ -48,7 +48,7 @@
   "license": "MIT",
   "scripts": {
     "build": "NODE_OPTIONS=\"--max-old-space-size=4096\" gatsby build  --prefix-paths",
-    "develop": "NODE_OPTIONS=\"--max-old-space-size=4096\" gatsby develop  --prefix-paths",
+    "develop": "NODE_OPTIONS=\"--max-old-space-size=4096\" gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve  --prefix-paths",

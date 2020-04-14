@@ -21,7 +21,7 @@ const List = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1400px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

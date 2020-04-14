@@ -56,8 +56,10 @@ const Sidebar = ({ sandboxes }) => {
     }
   }, [])
 
-  const downloads = (info.npm || {}).downloads
-  const links = (info.metadata || {}).links
+  const downloads = info ? (info.npm || {}).downloads : 0
+  const links = info ? (info.metadata || {}).links : {}
+
+  if (!info) return null
 
   return info.metadata ? (
     <Wrapper as="aside" paddingX={16} paddingY={24}>
@@ -67,12 +69,16 @@ const Sidebar = ({ sandboxes }) => {
       <Text variant="muted" block marginTop={2}>
         {info.metadata.description}
       </Text>
-      <Text block weight="bold" size={19} marginTop={9}>
-        {numberWithCommas(downloads[1].count)}
-      </Text>
-      <Text variant="muted" block marginTop={1}>
-        Weekly Downloads
-      </Text>
+      {downloads && (
+        <>
+          <Text block weight="bold" size={19} marginTop={9}>
+            {numberWithCommas(downloads[1].count)}
+          </Text>
+          <Text variant="muted" block marginTop={1}>
+            Weekly Downloads
+          </Text>
+        </>
+      )}
       <Element
         css={{
           display: 'grid',
@@ -116,14 +122,16 @@ const Sidebar = ({ sandboxes }) => {
             </Text>
           </Element>
         )}
-        <Element>
-          <Text block variant="muted">
-            Packages Using it
-          </Text>
-          <Text block paddingTop={1}>
-            {info.npm.dependentsCount}
-          </Text>
-        </Element>
+        {info.npm && (
+          <Element>
+            <Text block variant="muted">
+              Packages Using it
+            </Text>
+            <Text block paddingTop={1}>
+              {info.npm.dependentsCount}
+            </Text>
+          </Element>
+        )}
       </Element>
       {info.github && (
         <Element
@@ -185,46 +193,50 @@ const Sidebar = ({ sandboxes }) => {
           <Link href={links.npm}>@{cleanNPM(links.npm)}</Link>
         </Stack>
       )}
-      <Text
-        block
-        css={{ borderTop: '1px solid' + designLanguage.colors.grays[600] }}
-        marginTop={28}
-        paddingTop={4}
-        weight="bold"
-      >
-        Collaborators
-      </Text>
-      <Stack
-        marginTop={16}
-        css={{
-          flexWrap: 'wrap',
-
-          img: {
-            marginBottom: 8
-          }
-        }}
-        gap={2}
-      >
-        {info.metadata.maintainers.map(maintainer => (
-          <Link
-            key={maintainer.username}
-            href={`https://github.com/${maintainer.username}`}
+      {info.metadata.maintainers && (
+        <>
+          <Text
+            block
+            css={{ borderTop: '1px solid' + designLanguage.colors.grays[600] }}
+            marginTop={28}
+            paddingTop={4}
+            weight="bold"
           >
-            <Element
-              key={maintainer.username}
-              as="img"
-              css={{
-                'border-radius': designLanguage.radii.small + 'px',
-                border: '1px solid' + designLanguage.colors.grays[600]
-              }}
-              src={`https://github.com/${maintainer.username}.png?size=40`}
-              alt={maintainer.username}
-              width="32"
-              height="32"
-            />
-          </Link>
-        ))}
-      </Stack>
+            Collaborators
+          </Text>
+          <Stack
+            marginTop={16}
+            css={{
+              flexWrap: 'wrap',
+
+              img: {
+                marginBottom: 8
+              }
+            }}
+            gap={2}
+          >
+            {info.metadata.maintainers.map(maintainer => (
+              <Link
+                key={maintainer.username}
+                href={`https://github.com/${maintainer.username}`}
+              >
+                <Element
+                  key={maintainer.username}
+                  as="img"
+                  css={{
+                    'border-radius': designLanguage.radii.small + 'px',
+                    border: '1px solid' + designLanguage.colors.grays[600]
+                  }}
+                  src={`https://github.com/${maintainer.username}.png?size=40`}
+                  alt={maintainer.username}
+                  width="32"
+                  height="32"
+                />
+              </Link>
+            ))}
+          </Stack>
+        </>
+      )}
     </Wrapper>
   ) : (
     <Wrapper as="aside" paddingX={16} paddingY={24}></Wrapper>

@@ -21,7 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
     // Create dependency pages.
     result.data.allSandboxDependency.edges.forEach(edge => {
       createPage({
-        path: `examples/package/${edge.node.dependency}`,
+        path: `package/${edge.node.dependency}`,
         component: dependencyTemplate,
         context: {
           dependency: edge.node.dependency

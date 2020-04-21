@@ -168,7 +168,7 @@ const Main = ({ name, dependency }) => {
               href={`https://codesandbox.io/search?refinementList%5Btemplate%5D=&refinementList%5Bnpm_dependencies.dependency%5D%5B0%5D=${dependency.dependency}&page=2&configure%5BhitsPerPage%5D=12`}
               variant="secondary"
             >
-              Next Page
+              Find more examples
             </Button>
           )}
         </div>

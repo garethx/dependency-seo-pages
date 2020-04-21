@@ -84,7 +84,7 @@ const Main = ({ name, dependency }) => {
         variant="muted"
         style={{ maxWidth: 600 }}
       >
-        Learn how to use {name} by viewing and forking {name} example apps on
+        Learn how to use {name} by viewing and forking example apps that make use of {name} on
         CodeSandbox.
       </Text>
       <MainComponent>

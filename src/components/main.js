@@ -84,8 +84,8 @@ const Main = ({ name, dependency }) => {
         variant="muted"
         style={{ maxWidth: 600 }}
       >
-        Learn how to use {dependency.dependency} by viewing and forking example apps that make
-        use of {dependency.dependency} on CodeSandbox.
+        Learn how to use {dependency.dependency} by viewing and forking example
+        apps that make use of {dependency.dependency} on CodeSandbox.
       </Text>
       <MainComponent>
         <div>

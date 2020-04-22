@@ -34,8 +34,9 @@ const Header = () => {
         <Link href="https://codesandbox.io">
           <Logo />
         </Link>
-        <Stack gap={6} align="center">
+        <Stack gap={4} align="center">
           <SearchInput
+            style={{ padding: '0 1.5rem', margin: '0 0 0 -.25rem' }}
             placeholder="Search CodeSandbox"
             onChange={e => setValue(e.target.value)}
             value={value}

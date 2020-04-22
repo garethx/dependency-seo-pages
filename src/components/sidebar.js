@@ -12,7 +12,10 @@ const Wrapper = styled(Element)`
   top: 20px;
   padding: 2rem;
   grid-area: aside;
+  height: min-content;
+  overflow: hidden;
 `
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
@@ -65,7 +68,16 @@ const Sidebar = ({ sandboxes }) => {
       <Text block weight="bold" size={19}>
         About
       </Text>
-      <Text variant="muted" block marginTop={2}>
+      <Text
+        variant="muted"
+        block
+        marginTop={2}
+        style={{
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
+        }}
+      >
         {info.metadata.description}
       </Text>
       {downloads && (

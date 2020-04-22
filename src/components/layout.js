@@ -29,8 +29,33 @@ const Style = createGlobalStyle`
 
 const Main = styled.main`
   margin: 0 auto;
-  width: 1313px;
-  max-width: 80%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  display: grid;
+  grid-gap: 1rem;
+
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+  grid-template-areas:
+    'header'
+    'grid'
+    'aside';
+  overflow: hidden;
+
+  @media screen and (min-width: 567px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'grid '
+      'aside';
+  }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+      'header .'
+      'grid aside';
+  }
 `
 
 const Layout = ({ children }) => {

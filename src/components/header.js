@@ -18,14 +18,16 @@ const Header = () => {
       marginBottom={52}
       css={{
         borderBottom: '1px solid',
-        borderColor: designLanguage.colors.grays[600]
+        borderColor: designLanguage.colors.grays[600],
+        padding: '.5em 1rem',
+        maxHeight: 'max-content'
       }}
     >
       <Stack
         align="center"
         justify="space-between"
         css={{
-          width: '80%',
+          maxWidth: '1200px',
           margin: 'auto'
         }}
       >
@@ -43,11 +45,16 @@ const Header = () => {
               }
             }}
           />
+
           <Button
-            style={{ textDecoration: 'none', width: 110 }}
+            variant="secondary"
             as="a"
             href="https://codesandbox.io/s"
-            variant="secondary"
+            type="link"
+            style={{
+              textDecoration: 'none',
+              width: 'auto'
+            }}
           >
             Create Sandbox
           </Button>

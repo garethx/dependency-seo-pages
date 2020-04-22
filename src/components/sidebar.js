@@ -6,15 +6,12 @@ import { GlobeIcon, GHIcon, IssuesIcon, NPMIcon } from './icons'
 
 const Wrapper = styled(Element)`
   background: ${designLanguage.colors.grays[700]};
-  border-radius: ${designLanguage.radii.small}px;
+  border-radius: ${designLanguage.radii.medium}px;
   border: 1px solid ${designLanguage.colors.grays[600]};
   position: sticky;
   top: 20px;
-
-  @media screen and (max-width: 1000px) {
-    order: 1;
-    width: 100%;
-  }
+  padding: 2rem;
+  grid-area: aside;
 `
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -64,7 +61,7 @@ const Sidebar = ({ sandboxes }) => {
   if (!info) return null
 
   return info.metadata ? (
-    <Wrapper as="aside" paddingX={16} paddingY={24}>
+    <Wrapper as="aside">
       <Text block weight="bold" size={19}>
         About
       </Text>
@@ -172,25 +169,25 @@ const Sidebar = ({ sandboxes }) => {
       </Text>
 
       {links.homepage && (
-        <Stack align="center" gap={1} marginTop={4}>
-          <GlobeIcon></GlobeIcon>
+        <Stack align="center" gap={2} marginTop={4}>
+          <GlobeIcon> </GlobeIcon>
           <Link href={links.homepage}>{cleanURL(links.homepage)}</Link>
         </Stack>
       )}
       {links.repository && (
-        <Stack align="center" gap={1} marginTop={4}>
+        <Stack align="center" gap={2} marginTop={4}>
           <GHIcon></GHIcon>
           <Link href={links.repository}>{cleanURL(links.repository)}</Link>
         </Stack>
       )}
       {links.bugs && (
-        <Stack align="center" gap={1} marginTop={4}>
+        <Stack align="center" gap={2} marginTop={4}>
           <IssuesIcon></IssuesIcon>
           <Link href={links.bugs}>{cleanURL(links.bugs)}</Link>
         </Stack>
       )}
       {links.npm && (
-        <Stack align="center" gap={1} marginTop={4}>
+        <Stack align="center" gap={2} marginTop={4}>
           <NPMIcon></NPMIcon>
           <Link href={links.npm}>@{cleanNPM(links.npm)}</Link>
         </Stack>

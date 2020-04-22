@@ -34,7 +34,7 @@ const Header = () => {
         <Link href="https://codesandbox.io">
           <Logo />
         </Link>
-        <Stack gap={4} align="center">
+        <Stack gap={2} align="center">
           <SearchInput
             style={{ padding: '0 1.5rem', margin: '0 0 0 -.25rem' }}
             placeholder="Search CodeSandbox"
@@ -54,7 +54,9 @@ const Header = () => {
             type="link"
             style={{
               textDecoration: 'none',
-              width: 'auto'
+              width: 'auto',
+              height: '26px',
+              lineHeight: '26px'
             }}
           >
             Create Sandbox

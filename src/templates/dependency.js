@@ -18,7 +18,10 @@ const Dependency = ({ data: { sandboxDependency } }) => {
 
   return (
     <Layout>
-      <SEO title={`${name} examples - CodeSandbox`} pkg={name} />
+      <SEO
+        pkg={sandboxDependency.dependency}
+        title={`${sandboxDependency.dependency} examples - CodeSandbox`}
+      />
       <Main name={name} dependency={sandboxDependency} />
     </Layout>
   )

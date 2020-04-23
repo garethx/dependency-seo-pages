@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Logo = props => (
-  <svg width={23} height={23} fill="none" viewBox="0 0 23 23" {...props}>
+  <svg width={24} height={24} fill="none" viewBox="0 0 23 23" {...props}>
     <path
       fill="#999"
       fillRule="evenodd"

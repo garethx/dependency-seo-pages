@@ -18,22 +18,25 @@ const Header = () => {
       marginBottom={52}
       css={{
         borderBottom: '1px solid',
-        borderColor: designLanguage.colors.grays[600]
+        borderColor: designLanguage.colors.grays[600],
+        padding: '.5em 1rem',
+        maxHeight: 'max-content'
       }}
     >
       <Stack
         align="center"
         justify="space-between"
         css={{
-          width: '80%',
+          maxWidth: '1200px',
           margin: 'auto'
         }}
       >
         <Link href="https://codesandbox.io">
           <Logo />
         </Link>
-        <Stack gap={6} align="center">
+        <Stack gap={2} align="center">
           <SearchInput
+            style={{ padding: '0 1.5rem', margin: '0 0 0 -.25rem' }}
             placeholder="Search CodeSandbox"
             onChange={e => setValue(e.target.value)}
             value={value}
@@ -43,11 +46,18 @@ const Header = () => {
               }
             }}
           />
+
           <Button
-            style={{ textDecoration: 'none', width: 110 }}
+            variant="secondary"
             as="a"
             href="https://codesandbox.io/s"
-            variant="secondary"
+            type="link"
+            style={{
+              textDecoration: 'none',
+              width: 'auto',
+              height: '26px',
+              lineHeight: '26px'
+            }}
           >
             Create Sandbox
           </Button>

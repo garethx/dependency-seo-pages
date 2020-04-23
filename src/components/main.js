@@ -1,5 +1,12 @@
 import React from 'react'
-import { Text, Element, Stack, Link, Button } from '@codesandbox/components'
+import {
+  Text,
+  Element,
+  Stack,
+  Link,
+  Button,
+  Header
+} from '@codesandbox/components'
 import getIcon from '@codesandbox/common/lib/templates/icons'
 import styled from 'styled-components'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
@@ -7,41 +14,50 @@ import Sidebar from './sidebar'
 
 const ScreenShot = styled.img`
   object-fit: cover;
+  object-position: 50% 0;
   display: block;
-  object-position: 50% 50%;
 `
 
 const MainComponent = styled.div`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  grid-gap: 30px;
-  align-items: flex-start;
+  grid-area: grid;
+  grid-template-columns: 1fr;
+`
 
-  @media screen and (max-width: 1000px) {
-    grid-template-columns: 1fr;
+const IconHolder = styled.div`
+  width: 24px;
+  height: 24px;
+  padding: 0.25rem;
+  > svg {
+    width: 1rem !important;
+    height: 1rem !important;
   }
 `
 
 const List = styled.div`
+  overflow: hidden;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+  grid-gap: 1rem;
 
-  @media screen and (max-width: 1400px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 2rem;
   }
 
-  @media screen and (max-width: 600px) {
-    grid-template-columns: 1fr;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `
 
 const Card = styled.div`
   background: ${designLanguage.colors.grays[700]};
   border-radius: ${designLanguage.radii.medium}px;
+  clip-path: inset(0px round 0.5rem);
   border: 1px solid ${designLanguage.colors.grays[600]};
-  width: 310px;
   max-width: 100%;
+  overflow: hidden;
 
   svg {
     width: 24px;
@@ -52,18 +68,6 @@ const Card = styled.div`
   .screenshot {
     width: 100%;
   }
-
-  @media screen and (max-width: 1640px) {
-    width: 250px;
-  }
-
-  @media screen and (max-width: 1400px) {
-    width: 310px;
-  }
-
-  @media screen and (max-width: 600px) {
-    width: 100%;
-  }
 `
 
 const getScreenshot = id =>
@@ -72,21 +76,23 @@ const getScreenshot = id =>
 const Main = ({ name, dependency }) => {
   return (
     <>
-      <Text style={{ margin: 0 }} as="h1" weight="400" size={40} block>
-        {name} Examples
-      </Text>
-      <Text
-        as="h2"
-        weight="400"
-        marginBottom={10}
-        marginTop={2}
-        block
-        variant="muted"
-        style={{ maxWidth: 600 }}
-      >
-        Learn how to use {dependency.dependency} by viewing and forking example
-        apps that make use of {dependency.dependency} on CodeSandbox.
-      </Text>
+      <div style={{ gridArea: 'header' }}>
+        <Text style={{ margin: 0 }} as="h1" weight="400" size={40} block>
+          {name} Examples
+        </Text>
+        <Text
+          as="h2"
+          weight="400"
+          marginBottom={10}
+          marginTop={2}
+          block
+          variant="muted"
+          style={{ maxWidth: 600 }}
+        >
+          Learn how to use {dependency.dependency} by viewing and forking example
+          apps that make use of {dependency.dependency} on CodeSandbox.
+        </Text>
+      </div>
       <MainComponent>
         <div>
           <List>
@@ -100,17 +106,7 @@ const Main = ({ name, dependency }) => {
                     height={162}
                   />
                 </Link>
-                <Element
-                  paddingX={4}
-                  paddingTop={4}
-                  paddingBottom={5}
-                  style={{
-                    height: 158,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                  }}
-                >
+                <Element paddingX={4} paddingTop={4} paddingBottom={5}>
                   <div>
                     <Link href={`https://codesandbox.io/s/${a.objectID}`}>
                       <Text block>{a.title || a.objectID}</Text>
@@ -154,26 +150,29 @@ const Main = ({ name, dependency }) => {
                     ) : (
                       <Element />
                     )}
-                    {getIcon(a.template)({})}
+
+                    <IconHolder>{getIcon(a.template)({})}</IconHolder>
                   </Stack>
                 </Element>
               </Card>
             ))}
           </List>
+
           {dependency.sandboxes.length >= 12 && (
             <Button
               as="a"
+              type="link"
               marginTop={4}
               style={{ textDecoration: 'none' }}
               href={`https://codesandbox.io/search?refinementList%5Btemplate%5D=&refinementList%5Bnpm_dependencies.dependency%5D%5B0%5D=${dependency.dependency}&page=2&configure%5BhitsPerPage%5D=12`}
               variant="secondary"
             >
-              Next Page
+              Find more examples
             </Button>
           )}
         </div>
-        <Sidebar sandboxes={dependency} />
       </MainComponent>
+      <Sidebar sandboxes={dependency} />
     </>
   )
 }

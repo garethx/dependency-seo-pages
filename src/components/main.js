@@ -83,6 +83,7 @@ const Main = ({ name, dependency }) => {
         <Text
           as="h2"
           weight="400"
+          lineHeight="2rem"
           marginBottom={10}
           marginTop={2}
           block

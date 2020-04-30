@@ -2,7 +2,6 @@ import React from 'react'
 import { Text, Stack, Link, Element } from '@codesandbox/components'
 import styled from 'styled-components'
 import Github from './GitHub'
-import Spectrum from './spectrum'
 import Twitter from './twitter'
 import designLanguage from '@codesandbox/components/lib/design-language/index'
 
@@ -191,11 +190,6 @@ const Footer = () => (
       <li>
         <a title="Go to Twitter" href="https://twitter.com/codesandbox">
           <Twitter />
-        </a>
-      </li>
-      <li>
-        <a title="Go to Spectrum" href="https://spectrum.chat/codesandbox">
-          <Spectrum />
         </a>
       </li>
     </Stack>
